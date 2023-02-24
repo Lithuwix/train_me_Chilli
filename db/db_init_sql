@@ -1,1 +1,44 @@
-test
+CREATE TABLE  customer (
+id serial primary key,
+first_name varchar(40) NOT NULL CHECK(length(trim(first_name)) > 0),
+last_name varchar(40) NOT NULL CHECK(length(trim(last_name)) > 0),
+nick_name varchar(30) UNIQUE NOT NULL CHECK(length(trim(nick_name)) > 0)
+);
+
+
+CREATE TABLE  couch (
+ id serial primary key,
+ first_name varchar(40) NOT NULL CHECK(length(trim(first_name)) > 0),
+ last_name varchar(40) NOT NULL CHECK(length(trim(last_name)) > 0),
+ nick_name varchar(30) UNIQUE NOT NULL CHECK(length(trim(nick_name)) > 0),
+ password varchar(50) NOT NULL CHECK(length(trim(password)) > 0)
+  );
+
+CREATE TABLE  booking (
+ CONSTRAINT fk_training
+         FOREIGN KEY(id)
+       REFERENCES training(id),
+ CONSTRAINT fk_customer
+         FOREIGN KEY(id)
+       REFERENCES customer(id)
+ );
+
+CREATE TABLE  training (
+ id serial primary key,
+ CONSTRAINT fk_couch
+      FOREIGN KEY(id)
+    REFERENCES couch(id),
+ training_date DATE NOT NULL CHECK(training_date > CURRENT_DATE),
+ training_time TIME NOT NULL,
+ max_trainee INT NOT NULL
+ );
+
+ CREATE TABLE  season_pass (
+  id serial primary key,
+  amount_of_trainings INT,
+  CONSTRAINT fk_customer
+        FOREIGN KEY(id)
+      REFERENCES customer(id),
+
+   );
+
