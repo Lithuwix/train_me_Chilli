@@ -14,31 +14,23 @@ CREATE TABLE  couch (
  password varchar(50) NOT NULL CHECK(length(trim(password)) > 0)
   );
 
-CREATE TABLE  booking (
- CONSTRAINT fk_training
-         FOREIGN KEY(id)
-       REFERENCES training(id),
- CONSTRAINT fk_customer
-         FOREIGN KEY(id)
-       REFERENCES customer(id)
- );
 
 CREATE TABLE  training (
  id serial primary key,
- CONSTRAINT fk_couch
-      FOREIGN KEY(id)
-    REFERENCES couch(id),
+ couch_id integer REFERENCES couch(id),
  training_date DATE NOT NULL CHECK(training_date > CURRENT_DATE),
  training_time TIME NOT NULL,
  max_trainee INT NOT NULL
  );
 
+ CREATE TABLE  booking (
+  training_id integer REFERENCES training(id),
+  customer_id integer REFERENCES customer(id)
+  );
+
  CREATE TABLE  season_pass (
   id serial primary key,
   amount_of_trainings INT,
-  CONSTRAINT fk_customer
-        FOREIGN KEY(id)
-      REFERENCES customer(id),
-
+  customer_id integer REFERENCES customer(id)
    );
 
