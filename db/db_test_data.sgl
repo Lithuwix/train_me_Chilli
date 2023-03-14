@@ -1,0 +1,9 @@
+INSERT INTO customer (first_name, last_name, nick_name) VALUES ('Denis', 'Lushnikov', 'denchick');
+
+INSERT INTO couch (first_name, last_name, nick_name, password) VALUES ('Denis', 'Lushnikov', 'denchick', 'dfs34');
+
+INSERT INTO training (couch_id, training_date, training_time, max_trainee) VALUES ( 1, '2024-03-15', '08:00 PM', 7);
+
+INSERT INTO season_pass (amount_of_trainings, customer_id) VALUES ( 1, 1);
+
+INSERT INTO booking (training_id, customer_id) VALUES ( 1, 1);
